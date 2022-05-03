@@ -28,17 +28,17 @@ do
             if [[ $r_type == "subnet" ]]
             then
                 echo "Now running: aws $r_type delete-resource --resource-id $id"
-                aws ec2 delete-subnet --subnet-id $id
+                aws --region $region ec2 delete-subnet --subnet-id $id
             
             elif [[ $r_type == "vpc" ]]
             then
                 echo "terminating ec2 instance $id"
-                aws ec2 delete-vpc --vpc-id $id
+                aws --region $region ec2 delete-vpc --vpc-id $id
 
             elif [[ $r_type == "ec2" ]]
             then
                 echo "terminating vpc instance $id"
-                aws ec2 terminate-instances --instance-ids $id
+                aws --region $region ec2 terminate-instances --instance-ids $id
 
             else
                 echo "function for delete ${r_type} is not yet impelemted"
